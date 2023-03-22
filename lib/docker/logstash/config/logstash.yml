@@ -1,5 +1,5 @@
 xpack.monitoring.elasticsearch.hosts: ["https://es01.service.local:9200"]
 xpack.monitoring.elasticsearch.username: "elastic"
 xpack.monitoring.elasticsearch.password: "changeme"
-xpack.monitoring.elasticsearch.ssl.certificate_authority: "/usr/share/logstash/certs/ca/ca.crt"
+xpack.monitoring.elasticsearch.ssl.certificate_authority: "/usr/share/logstash/config/certs/ca/ca.crt"
 queue.type: persisted

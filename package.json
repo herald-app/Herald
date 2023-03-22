@@ -1,0 +1,20 @@
+{
+  "name": "herald-ecs",
+  "version": "0.1.0",
+  "bin": {
+    "herald-ecs": "bin/herald-ecs.js"
+  },
+  "scripts": {
+    "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
+    "cdk": "cdk",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.67.0",
+    "jest": "^29.4.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.67.0",
+    "constructs": "^10.0.0"
+  }
+}

@@ -3,15 +3,14 @@ server.name: kibana
 elasticsearch.hosts: ["https://es01.service.local:9200"]
 elasticsearch.username: kibana_system
 elasticsearch.password: changeme
-elasticsearch.ssl.certificateAuthorities:
-  ["/usr/share/kibana/config/certs/ca/ca.crt"]
+elasticsearch.ssl.certificateAuthorities: ["/config/certs/ca/ca.crt"]
 
 monitoring.ui.container.elasticsearch.enabled: true
 monitoring.ui.container.logstash.enabled: true
 
 #APM Settings
 xpack.fleet.agents.fleet_server.hosts:
-  ["https://fleetserver.service.local:8220"]
+  ["https://fleet-server.service.local:8220"]
 
 xpack.fleet.outputs:
   - id: fleet-default-output
@@ -22,7 +21,7 @@ xpack.fleet.outputs:
     is_default_monitoring: true
     config:
       ssl.certificate_authorities:
-        ["/usr/share/elastic-agent/config/certs/ca/ca.crt"]
+        ["/usr/share/elastic-agent/config/certs/fleet/fleet.crt"]
 
 xpack.fleet.packages:
   - name: fleet_server
@@ -37,6 +36,7 @@ xpack.fleet.packages:
 xpack.fleet.agentPolicies:
   - name: Fleet Server Policy
     id: fleet-server-policy
+    namespace: default
     description: Static agent policy for Fleet Server
     monitoring_enabled:
       - logs
@@ -75,4 +75,4 @@ xpack.fleet.agentPolicies:
               - name: host
                 value: 0.0.0.0:8200
               - name: url
-                value: https://apm.service.local:8200
+                value: ["https://apm.service.local:8200"]

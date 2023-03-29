@@ -5,7 +5,7 @@ elasticsearch.ssl.certificateAuthorities: "/usr/share/kibana/config/certs/ca/ca.
 server.host: 0.0.0.0
 
 #APM Settings
-xpack.fleet.agents.fleet_server.hosts: ["https://fleetserver.service.local:8220"]
+xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server.service.local:8220"]
 
 xpack.fleet.outputs:
   - id: fleet-default-output

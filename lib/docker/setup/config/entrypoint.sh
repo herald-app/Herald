@@ -29,7 +29,7 @@ if [ ! -f config/certs/certs.zip ]; then
     "      - localhost\n"\
     "    ip:\n"\
     "      - 0.0.0.0\n"\
-    "  - name: fleet\n"\
+    "  - name: fleet-server\n"\
     "    dns:\n"\
     "      - fleet-server.service.local\n"\
     "      - localhost\n"\

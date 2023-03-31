@@ -1,21 +1,21 @@
-elasticsearch.hosts: "https://es01.service.local:9200" #private IP address of an elasticsearch node
+elasticsearch.hosts: https://172.31.3.172:9200 #private IP address of an elasticsearch node
 elasticsearch.username: kibana_system
-elasticsearch.password: changeme
-elasticsearch.ssl.certificateAuthorities: "/usr/share/kibana/config/certs/ca/ca.crt"
+elasticsearch.password: kibana
+elasticsearch.ssl.certificateAuthorities: /home/ubuntu/certs/ca/ca.crt
 server.host: 0.0.0.0
 
 #APM Settings
-xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server.service.local:8220"]
+xpack.fleet.agents.fleet_server.hosts: [https://172.31.7.196:8220]
 
 xpack.fleet.outputs:
   - id: fleet-default-output
     name: default
     type: elasticsearch
-    hosts: [https://es01.service.local:9200]
+    hosts: [https://172.31.3.172:9200]
     is_default: true
     is_default_monitoring: true
     config:
-      ssl.certificate_authorities: "/usr/share/elastic-agent/config/certs/ca/ca.crt"
+      ssl.certificate_authorities: "/home/ubuntu/certs/ca/ca.crt" #change to /usr/share/elastic-agent/certs/ca/ca.crt for docker container
 
 xpack.fleet.packages:
   - name: fleet_server
@@ -51,13 +51,13 @@ xpack.fleet.agentPolicies:
       - logs
       - metrics
     package_policies:
-      - name: system-2
+      - name: system-1
         package:
           name: system
-      - name: elastic_agent-2
+      - name: elastic_agent-1
         package:
           name: elastic_agent
-      - name: apm-2
+      - name: apm-1
         package:
           name: apm
         # See the APM package manifest for a list of possible inputs.

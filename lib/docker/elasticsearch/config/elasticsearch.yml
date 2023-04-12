@@ -1,0 +1,7 @@
+cluster.name: production
+node.name: node
+network.host: [_ec2_]
+discovery.seed_providers: ec2
+discovery.ec2.any_group: true
+discovery.ec2.endpoint: ec2.us-east-1.amazonaws.com
+cloud.node.auto_attributes: true

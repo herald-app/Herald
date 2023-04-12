@@ -29,6 +29,12 @@ if [ ! -f config/certs/certs.zip ]; then
     "      - localhost\n"\
     "    ip:\n"\
     "      - 0.0.0.0\n"\
+    "  - name: data-node.service.local\n"\
+    "    dns:\n"\
+    "      - data-node.service.local\n"\
+    "      - localhost\n"\
+    "    ip:\n"\
+    "      - 0.0.0.0\n"\
     "  - name: fleet-server\n"\
     "    dns:\n"\
     "      - fleet-server.service.local\n"\
@@ -37,7 +43,7 @@ if [ ! -f config/certs/certs.zip ]; then
     "      - 0.0.0.0\n"\
     > config/certs/instances.yml;
     bin/elasticsearch-certutil cert --silent --pem -out config/certs/certs.zip --in config/certs/instances.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key;
-    unzip config/certs/certs.zip -d config/certs;
+    unzip config/certs/certs.zip -d config/certs && rm config/certs/certs.zip;
 
 fi;
 # echo "Setting file permissions"

@@ -7,4 +7,6 @@ RUN apt-get update
 RUN apt-get install -y vim
 RUN apt-get install -y nano
 
+
 USER elasticsearch
+RUN bin/elasticsearch-plugin install --batch discovery-ec2

@@ -1,8 +1,8 @@
 {
-  "name": "herald-ecs",
+  "name": "herald-app",
   "version": "0.1.0",
   "bin": {
-    "herald-ecs": "bin/herald-ecs.js"
+    "herald-ecs": "bin/herald-app.js"
   },
   "scripts": {
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",

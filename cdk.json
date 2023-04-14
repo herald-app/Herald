@@ -1,5 +1,5 @@
 {
-  "app": "node bin/herald-ecs.js",
+  "app": "node bin/herald-app.js",
   "watch": {
     "include": [
       "**"

@@ -1,5 +1,5 @@
 <!-- ![Herald Logo](https://github.com/Herald-Inc/herald-cli/blob/main/img/herald-logo.png) -->
-<img style="max-width:500px" src="https://github.com/Herald-Inc/herald-cli/blob/main/img/herald-logo.png" alt="Herald Logo"  />
+<img style="max-width:300px" src="https://github.com/Herald-Inc/herald-cli/blob/main/img/herald-logo.png" alt="Herald Logo"  />
 
 ## Overview 
 Herald is an observability solution that simplifies the deployment of the ELK stack, a popular set of tools used for monitoring the health and performance of software systems. It allows software developers to conveniently collect and explore telemetry data, including logs, traces, and metrics, through a single, user-friendly interface.

@@ -46,7 +46,7 @@ To install Filebeat, please see Elastic documentation [here](https://www.elastic
 
 Note that Filebeat should _not_ be configured for output to Elasticsearch but rather for output to Logstash; otherwise, log data will not be processed by Logstash prior to reaching its final destination in Elasticsearch.
 
-To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html). Note that you will need the DNS name for the Logstash load balancer, as Filebeat needs to know the destination address for the Logstash service. The DNS name is output to the console after deployment of the Logstash stack. The DNS name can also be ascertained in the AWS EC2 console after the Logstash stack has been deployed. 
+To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html). Note that you will need the DNS name for the Logstash load balancer, as Filebeat needs to know the destination address for the Logstash service. The DNS name is output to the console after deployment of the Logstash stack. The DNS name will also be available in the AWS EC2 console after the Logstash stack has been deployed. 
 
 ### Configuring Logstash
 While Herlad comes with a default Logstash pipeline configuration for log processing, particular use cases may require one or more different pipelines. 
@@ -63,9 +63,9 @@ Elastic Agent should be installed in a docker container using the docker command
 - Private IP address for one of the master-eligible Elasticsearch nodes (e.g., `es01`)
 - Fleet Server enrollment token 
 
-The Logstash loadbalancer DNS name is output to the terminal once the Logstash stack has been deployed. It can also be ascertained from the AWS EC2 console after deployment of the Logstash stack.
+The Logstash loadbalancer DNS name is output to the terminal once the Logstash stack has been deployed. It will also be available in the AWS EC2 console after deployment.
 
-The Elasticsearch private IP address can be ascertained from the 'Networking' tab of any of the Elasticsearch tasks in the AWS ECS console. As an example, you can use the private IP address for the ES01 service.
+The Elasticsearch private IP address is available in the 'Networking' tab of any of the Elasticsearch tasks in the AWS ECS console. As an example, you can use the private IP address for the ES01 service.
 
 Finally, the Fleet Server enrollment token can be obtained from the Kibana UI under `Management >> Fleet >> Enrollment Tokens`.
 
@@ -76,7 +76,7 @@ The CA certificate can be obtained from any of the Elasticsearch master-eligible
 2. Copy the Elasticsearch certificates directory from the Elasticsearch container: `/usr/share/elasticsearch/config/certs/`
 3. Copy the Elasticsearch certificates directory to the server where the Elastic Agent is to be installed. For example, the certificates directory might be copied into a `certs` directory in the user's home directory. This directory will then be mounted to the Docker container that runs the Elastic Agent.
 
-Now that values for required environment variables have been obtained, as well as the Certificate Authority, Elastic Agent can be installed with the following command:
+Now that values for required environment variables have been obtained, as well as the Certificate Authority, Elastic Agent can be installed with the following command. However, before running the command, be sure to insert the appropriate environment variable values as noted above, as well as the path to the location of the certificates directory on the host machine.
 
 ```
 sudo docker run \

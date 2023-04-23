@@ -15,6 +15,10 @@ For more detailed information about Herald's use case, Herald's architecture, an
 
 ## Table of Contents 
 - [Installation](#installation)
+  - [Installing Herald](#installing-herald)
+  - [Installing Filebeat](#installing-filebeat)
+  - [Configuring Logstash](#configuring-logstash)
+  - [Installing Elastic Agent with APM Integration](#installing-elastic-agent-with-apm-integreation)
 - [Herald Architectural Overview](#herald-architectural-overview)
   - [The Herald Pipeline](#the-herald-pipeline)
     - [Data Collection and Shipment](#data-collection-and-shipment)
@@ -30,6 +34,7 @@ For more detailed information about Herald's use case, Herald's architecture, an
   - [Bastion Host](#bastion-host)
 
 ## Installation 
+### Installing Herald
 Herald can be installed using the Herald CLI. For more information about how to install and deploy Herald using the CLI, see [here](https://github.com/herald-app/herald-cli).
 
 Herald installs version 8.6 of all Elastic applications. Please note that all applications must be on the same minor version in order to work together properly.
@@ -41,7 +46,10 @@ To install Filebeat, please see Elastic documentation [here](https://www.elastic
 
 Note that Filebeat should _not_ be configured for output to Elasticsearch but rather for output to Logstash; otherwise, log data will not be processed by Logstash prior to reaching its final destination in Elasticsearch.
 
-To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html).
+To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html). Note that you will need the DNS name for the Logstash load balancer, as Filebeat needs to know the destination address for the Logstash service. The DNS name is output to the console after deployment of the Logstash stack. The DNS name can also be ascertained in the AWS EC2 console. 
+
+### Configuring Logstash
+While Herlad comes with a default Logstash pipeline configuration, particular use cases may require a different pipeline. To configure Logstash pipelines for log ingestion, see Elastic documentation [here](https://www.elastic.co/guide/en/logstash/8.6/configuration.html).
 
 ### Installing Elastic Agent with APM Integration 
 Elastic Agent should be installed 

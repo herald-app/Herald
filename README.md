@@ -32,6 +32,13 @@ For more detailed information about Herald's use case, Herald's architecture, an
 ## Installation 
 Herald can be installed using the Herald CLI. For more information about how to install and deploy Herald using the CLI, see [here](https://github.com/herald-app/herald-cli).
 
+Herald installs version 8.6.7 of all Elastic applications. Please note that all applications must be on the same patch version in order to work together properly.
+
+Herald also requires that two applications be installed on the user's architecture in order to send traces and metrics data to Herald.
+
+### Installing Filebeat for Log Collection
+To install Filebeat, please see 
+
 ## Herald Architectural Overview 
 Herald is built on the ELK stack-- Elasticsearch for data storage and indexing, Logstash for log processing, and Kibana for data querying and visualization.
 

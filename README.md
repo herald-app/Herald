@@ -67,12 +67,12 @@ The Logstash loadbalancer DNS name is output to the terminal once the Logstash s
 
 The Elasticsearch private IP address can be ascertained from the 'Networking' tab of any of the Elasticsearch tasks in the AWS ECS console. As an example, you can use the private IP address for the ES01 service.
 
-Finally, the Fleet Server enrollment token can be obtained from the Kibana UI under Management >> Fleet >> Enrollment Tokens.
+Finally, the Fleet Server enrollment token can be obtained from the Kibana UI under `Management >> Fleet >> Enrollment Tokens`.
 
 Additionally, the Elasticsearch Certificate Authority will need to be obtained. This certificate provides Elastic Agent with the proper security credentials to send data to the Elasticsearch cluster.
 
 The CA certificate can be obtained from any of the Elasticsearch master-eligible nodes and should be obtained in the following manner:
-1. SSH into any of the master-eligible Elasticsearch nodes (es01, es02, es03).
+1. Using the Bastion Host, SSH into any of the master-eligible Elasticsearch nodes (es01, es02, es03).
 2. Copy the Elasticsearch certificates directory from the Elasticsearch container: `/usr/share/elasticsearch/config/certs/`
 3. Copy the Elasticsearch certificates directory to the server where the Elastic Agent is to be installed. For example, the certificates directory might be copied into a `certs` directory in the user's home directory. This directory will then be mounted to the Docker container that runs the Elastic Agent.
 

@@ -46,10 +46,16 @@ To install Filebeat, please see Elastic documentation [here](https://www.elastic
 
 Note that Filebeat should _not_ be configured for output to Elasticsearch but rather for output to Logstash; otherwise, log data will not be processed by Logstash prior to reaching its final destination in Elasticsearch.
 
-To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html). Note that you will need the DNS name for the Logstash load balancer, as Filebeat needs to know the destination address for the Logstash service. The DNS name is output to the console after deployment of the Logstash stack. The DNS name can also be ascertained in the AWS EC2 console. 
+To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html). Note that you will need the DNS name for the Logstash load balancer, as Filebeat needs to know the destination address for the Logstash service. The DNS name is output to the console after deployment of the Logstash stack. The DNS name can also be ascertained in the AWS EC2 console after the Logstash stack has been deployed. 
 
 ### Configuring Logstash
-While Herlad comes with a default Logstash pipeline configuration, particular use cases may require a different pipeline. To configure Logstash pipelines for log ingestion, see Elastic documentation [here](https://www.elastic.co/guide/en/logstash/8.6/configuration.html).
+While Herlad comes with a default Logstash pipeline configuration for log processing, particular use cases may require one or more different pipelines. 
+
+Pipelines are defined in one or more `.conf` files that get placed in the `/usr/share/logstash/pipeline/` directory of the Logstash container. To configure Logstash pipelines, see Elastic documentation [here](https://www.elastic.co/guide/en/logstash/8.6/configuration.html).
+
+To apply user created pipeline configuration files, each file must be uploaded to the `/usr/share/logstash/pipline/` directory of one of the Logstash containers. This directory is an EFS volume shared by all Logstash instances, so all Logstash instances will access the same configuration files. Accessing this volume will require using the Bastion Host to access one of the Logstash instances.
+
+Once new pipeline configuration files have been uploaded to the appropriate directory, all Logstash container instances must be restarted in order for the new configuration files to take effect.
 
 ### Installing Elastic Agent with APM Integration 
 Elastic Agent should be installed 

@@ -93,6 +93,18 @@ sudo docker run \
   docker.elastic.co/beats/elastic-agent:8.6.2
 ```
 
+Finally, the application's code must be instrumented to collect telemetry data by installing the APM agent in the application's code. Please see Elastic documentation [here](https://www.elastic.co/guide/en/apm/guide/8.6/apm-quick-start.html#add-apm-integration-agents) for instructions for installing the APM agent in your application's language. Currently supported languages are:
+- Go
+- iOS 
+- Java 
+- .NET 
+- Node.js 
+- PHP 
+- Python 
+- Ruby 
+- RUM 
+- OpenTelemetry
+
 ## Herald Architectural Overview 
 Herald is built on the ELK stack-- Elasticsearch for data storage and indexing, Logstash for log processing, and Kibana for data querying and visualization.
 

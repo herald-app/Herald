@@ -58,7 +58,36 @@ To apply user created pipeline configuration files, each file must be uploaded t
 Once new pipeline configuration files have been uploaded to the appropriate directory, all Logstash container instances must be restarted in order for the new configuration files to take effect.
 
 ### Installing Elastic Agent with APM Integration 
-Elastic Agent should be installed 
+Elastic Agent should be installed in a docker container using the docker command at the end of this section. However, in order run this command values for specific variables will need to be procured beforehand:
+- Logstash loadbalancer DNS name
+- Private IP address for one of the master-eligible Elasticsearch nodes (e.g., `es01`)
+- Fleet Server enrollment token 
+
+The Logstash loadbalancer DNS name is output to the terminal once the Logstash stack has been deployed. It can also be ascertained from the AWS EC2 console after deployment of the Logstash stack.
+
+The Elasticsearch private IP address can be ascertained from the 'Networking' tab of any of the Elasticsearch tasks in the AWS ECS console. As an example, you can use the private IP address for the ES01 service.
+
+Finally, the Fleet Server enrollment token can be obtained from the Kibana UI under Management >> Fleet >> Enrollment Tokens.
+
+Additionally, the Elasticsearch Certificate Authority will need to be obtained. This certificate provides Elastic Agent wih the proper security credentials to send data to the Elasticsearch cluster.
+
+The CA certificate is available on any of the Elasticsearch containers in the following location:
+
+```
+/usr/share/elasticsearch/config/certs/ca/ca.crt
+```
+
+Now that values for required environment variables have been obtained, as well as the Certificate Authority, Elastic Agent can be installed with the following command:
+
+```
+sudo docker run \
+  --publish 8200:8200 \
+  --env FLEET_ENROLL=1 \
+  --env FLEET_URL=https://<LogstashLoadbalancerDNS>:8200 \
+  --env FLEET_SERVER_ELASTICSEARCH_HOST=https://<ElasticsearchIP>:9200 \
+  --env FLEET_ENROLLMENT_TOKEN=<EnrollmentToken> \
+  --env FLEET_CA=/usr/share/elastic-agent/config
+```
 
 ## Herald Architectural Overview 
 Herald is built on the ELK stack-- Elasticsearch for data storage and indexing, Logstash for log processing, and Kibana for data querying and visualization.

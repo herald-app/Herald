@@ -32,12 +32,19 @@ For more detailed information about Herald's use case, Herald's architecture, an
 ## Installation 
 Herald can be installed using the Herald CLI. For more information about how to install and deploy Herald using the CLI, see [here](https://github.com/herald-app/herald-cli).
 
-Herald installs version 8.6.7 of all Elastic applications. Please note that all applications must be on the same patch version in order to work together properly.
+Herald installs version 8.6.7 of all Elastic applications. Please note that all applications must be on the same minor version in order to work together properly.
 
-Herald also requires that two applications be installed on the user's architecture in order to send traces and metrics data to Herald.
+Herald also requires that two applications be installed on the user's architecture in order to send logs, traces and metrics data to Herald.
 
-### Installing Filebeat for Log Collection
-To install Filebeat, please see 
+### Installing Filebeat
+To install Filebeat, please see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/filebeat-installation-configuration.html) and follow instructions for a self-managed installation.
+
+Note that Filebeat should _not_ be configured for output to Elasticsearch but rather for output to Logstash; otherwise, log data will not be processed by Logstash prior to reaching its final destination in Elasticsearch.
+
+To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html).
+
+### Installing Elastic Agent with APM Integration 
+Elastic Agent should be installed 
 
 ## Herald Architectural Overview 
 Herald is built on the ELK stack-- Elasticsearch for data storage and indexing, Logstash for log processing, and Kibana for data querying and visualization.

@@ -3,6 +3,16 @@
 ## Overview 
 Herald is an observability solution that simplifies the deployment of the ELK stack, a popular set of tools used for monitoring the health and performance of software systems. It allows software developers to conveniently collect and explore telemetry data, including logs, traces, and metrics, through a single, user-friendly interface.
 
+In particular, Herald deploys the following applications in a distributed environment and takes care of most of the initial configuration required for these applications to work together as a single observability solution:
+- Elasticsearch
+- Logstash
+- Kibana
+- Fleet Server
+
+Herald is deployed on AWS infrastructure, which requires that the application that will send data into Herald also be deployed on AWS infrastructure.
+
+For more detailed information about Herald's use case, Herald's architecture, and the implementation challenges and design decisions involved in building Herald, please refer to the [case study](https://herald-app.github.io).
+
 ## Table of Contents 
 - [Installation](#installation)
 - [Herald Architectural Overview](#herald-architectural-overview)
@@ -47,14 +57,23 @@ Once installed, the user then instruments their code to allow the agents to coll
 ##### Logstash for Log Data Processing
 Within the Herald pipeline, Logstash is configured to ingest data from Filebeat. The user must configure Logstash with an appropriate filter that enables a specific transformation of the ingested data to support a specific application use case. For example, a user may use the “geoip” filter to add information about the geographical location of IP addresses. Once the data is processed, it is sent to Elasticsearch for storage and indexing.
 
+Herald deploys two load-balanced instances of Logstash.
+
 ##### APM Server for Traces and Metrics Processing
 The APM Server comprises two parts: the Elastic Agent and the APM Integration. Elastic Agents are installed on the user’s application servers to receive different data types, such as metrics and traces, from the APM Agents.
 
 The Elastic Agent can be updated with configurations enabling the collection of new or different data sources. The configurations are implemented through agent policies. The APM Integration is one of those configurations that gets specified within an agent policy. The Elastic Agent with the APM Integration acts as the APM Server, which lives entirely on the user’s application server. The APM Server accepts tracing and metrics data from an APM Agent. The APM Server then processes the data, which includes validating it and transforming it into Elasticsearch documents before sending it on to Elasticsearch.
 
+##### Fleet Server for Elastic Agent Enrollment and Management 
+Fleet Server provides centralized enrollment and management of Elastic Agents. Fleet Server is responsible for continuously checking the appropriate Elasticsearch index for updated agent policies and, if found, updating Elastic Agents with the updated policies.
+
+Herald deploys two load-balanced instances of Fleet Server.
+
 #### Data Storage 
 ##### Elasticsearch
 Elasticsearch is a distributed search and analytics engine and document store. It stores complex data structures serialized as JSON documents. Elasticsearch stores and indexes data in a way that enables near real-time searching (i.e. within 1 second). It is a durable data store, which means it can persist long term data as needed. Within the Herald pipeline, Elasticsearch receives data from Logstash and the APM Server. It acts as a storage component that can be queried through Kibana to be visualized.
+
+Elasticsearch is deployed via two clusters: a 3-node cluster of master-eligible instances, and a single node cluster of data and ingestion instances, which can autoscale to a total of 12 instances as needed.
 
 #### Data Querying and Visualization 
 ##### Kibana

@@ -9,7 +9,7 @@ In particular, Herald deploys the following applications in a distributed enviro
 - Kibana
 - Fleet Server
 
-Herald is deployed on AWS infrastructure, which requires that the application that will send data into Herald also be deployed on AWS infrastructure.
+Herald is deployed on AWS infrastructure using Cloud Development Kit (CDK), which requires that the application that will send data into Herald also be deployed on AWS infrastructure.
 
 For more detailed information about Herald's use case, Herald's architecture, and the implementation challenges and design decisions involved in building Herald, please refer to the [case study](https://herald-app.github.io).
 

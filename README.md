@@ -44,7 +44,7 @@ Herald also requires that two applications be installed on the user's architectu
 ### Installing Filebeat
 To install Filebeat, please see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/filebeat-installation-configuration.html) and follow instructions for a self-managed installation.
 
-To configure Filebeat inputs, Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/configuration-filebeat-options.html).
+To configure Filebeat inputs, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/configuration-filebeat-options.html).
 
 Note that Filebeat should _not_ be configured for output to Elasticsearch but rather for output to Logstash; otherwise, log data will not be processed by Logstash prior to reaching its final destination in Elasticsearch.
 

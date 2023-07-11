@@ -51,7 +51,7 @@ Note that Filebeat should _not_ be configured for output to Elasticsearch but ra
 To configure Filebeat for output to Logstash, see Elastic documentation [here](https://www.elastic.co/guide/en/beats/filebeat/8.6/logstash-output.html). Note that you will need the DNS name for the Logstash load balancer, as Filebeat needs to know the destination address for the Logstash service. The DNS name is output to the console after deployment of the Logstash stack. The DNS name will also be available in the AWS EC2 console after the Logstash stack has been deployed. 
 
 ### Configuring Logstash
-While Herlad comes with a default Logstash pipeline configuration for log processing, particular use cases may require one or more different pipelines. 
+While Herald comes with a default Logstash pipeline configuration for log processing, particular use cases may require one or more different pipelines. 
 
 Pipelines are defined in one or more `.conf` files that get placed in the `/usr/share/logstash/pipeline/` directory of the Logstash container. To configure Logstash pipelines, see Elastic documentation [here](https://www.elastic.co/guide/en/logstash/8.6/configuration.html).
 
